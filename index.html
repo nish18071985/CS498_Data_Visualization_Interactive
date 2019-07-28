@@ -7,30 +7,17 @@
       <meta name="final project" content="Data Visualization">
       <link rel="stylesheet" href="main.css">
       <script src="https://d3js.org/d3.v4.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.12.1/d3-annotation.min.js"></script>
    </head>
    <body>
       
       <div class="slideshow-container">
-         <div class="mySlides fade">
+        <div class="mySlides fade">
             <div class="numbertext">1 / 3</div>
-            <h4>Life Expectancy by Country</h4>
-            <p><i>We take a look at the Life expectancies of a few countries over the years and observe how changing times affect them.
-            Several studies have undertaken in the past on factors affecting life expectancy considering demographic variables, income composition and mortality rates. But we aim to
-            see how HDI impacts it...</i></p>
-            <p style="color:blue"><i>
-            [Hover over each country on the legend to see the change in Life expectancy for that country in the chart clearly.
-            The arrows on the sides or the dots at the bottom helps you navigate between different scenes like a slide show. 
-            Upper right hand corner of the page specifies the page number you are on.]
-            </i></p>
-             <svg id="LEChart" width="1100" height="600" style="margin-left:30px"></svg>
-
-         </div>
-         <div class="mySlides fade">
-            <div class="numbertext">2 / 3</div>
             <h4>HDI : Human Development Index by Country</h4>
-            <p><i>We take a look at the HDI of a few countries over the years and observe how changing times affect them.
-            In general we see that with improving HDI we have improving life expectancy, but do they hold some kind of relationship among themselves.
-            Let's take a look at it next...</i></p>
+            <p><i>Let's take a look at the HDI of a few countries over past few years and observe how over time countries have improved over it.
+            Several studies have been undertaken in the past on factors affecting life expectancy considering demographic variables, income composition and mortality rates. But none of them 
+            have factored the impact of HDI on it. That's what we aim to look at. Let's see if HDI has any impacts on it or not...</i></p>
             <p style="color:blue"><i>
             [Hover over each country on the legend to see the change in Life expectancy for that country in the chart clearly.
             The arrows on the sides or the dots at the bottom helps you navigate between different scenes like a slide show.
@@ -39,10 +26,26 @@
             <svg id="HDIChart" width="1100" height="600" style="margin-left:30px"></svg>
          </div>
          <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <h4>Life Expectancy by Country</h4>
+            <p><i>We will now look at how Life expectancies of a few countries have changed over past few years.
+            In general if you observe that with improving HDI we have improving life expectancy for few countries, but do they actually hold some kind of relationship among themselves.
+            Let's take a look at it next....</i></p>
+            <p style="color:blue"><i>
+            [Hover over each country on the legend to see the change in Life expectancy for that country in the chart clearly.
+            The arrows on the sides or the dots at the bottom helps you navigate between different scenes like a slide show. 
+            Upper right hand corner of the page specifies the page number you are on.]
+            </i></p>
+             <svg id="LEChart" width="1100" height="600" style="margin-left:30px"></svg>
+
+         </div>
+         
+         <div class="mySlides fade">
             <div class="numbertext">3 / 3</div>
             <h4>Life Expectancy Vs HDI</h4>
-            <p><i>Lastly we draw a comparison between Life Expectancy and HDI of a few countries for a particular year (<b>default is 2000</b>).
-            From our observation of the plot we can conclude that there is indeed a linear relationship between Life expectancy and HDI.</i></p>
+            <p><i>Lastly we draw a comparison between Life Expectancy and HDI of a few countries for a particular year (<b>default is the year 2000</b>).
+            From our observation of the plot we can conclude that there is indeed a positive linear relationship between Life expectancy and HDI. So countries with lower Life expectancies
+            would like to increase its healthcare expenditure in order to improve its average lifespan.</i></p>
             <p style="color:blue"><i>
             [Please select a Year from the dropdown below to see the relationship between Life expectancy and HDI for that year.
             The arrows on the sides or the dots at the bottom helps you navigate between different scenes like a slide show.
@@ -123,6 +126,34 @@
         .attr("font-size", 12)
         .text("Expectancy");
         var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
+        //annotations
+        var annotations = [
+            {
+                note: {
+                label: "Botswana had the highest % increase in Life Expectancy over years",
+                align: "left",  // try right or left
+                wrap: 200,  // try something smaller to see text split in several lines
+                padding: 10 
+                },
+                connector: {
+                end: "arrow",        // Can be none, or arrow or dot
+                type: "line",      // ?? don't know what it does
+                lineType : "vertical",    // ?? don't know what it does
+                endScale: 10     // dot size
+                },
+                x: 350,
+                y: 305,
+                dy: 120,
+                dx: 80
+            }
+        ]
+
+        var makeAnnotations = d3.annotation().annotations(annotations)
+        g.append("g")
+        .call(makeAnnotations)
+
+
         d3.csv("HDI_LifeExpectancy_Data.csv", function(data) {
         //Getting distinct Countries from the list
         var Country = data.map(function(obj) {
@@ -201,6 +232,33 @@
         .attr("font-size", 12)
         .text("HDI");
         var colorScale1 = d3.scaleOrdinal(d3.schemeCategory10);
+
+        //annotations
+        var annotations = [
+            {
+                note: {
+                label: "Botswana had the highest % increase in HDI over years",
+                align: "left",  // try right or left
+                wrap: 200,  // try something smaller to see text split in several lines
+                padding: 10 
+                },
+                connector: {
+                end: "arrow",        // Can be none, or arrow or dot
+                type: "line",      // ?? don't know what it does
+                lineType : "vertical",    // ?? don't know what it does
+                endScale: 10     // dot size
+                },
+                x: 700,
+                y: 240,
+                dy: -30,
+                dx: -70
+            }
+        ]
+
+        var makeAnnotations = d3.annotation().annotations(annotations)
+        g1.append("g")
+        .call(makeAnnotations)
+
         d3.csv("HDI_LifeExpectancy_Data.csv", function(data) {
         //Getting distinct Countries from the list
         var Country = data.map(function(obj) {
@@ -242,6 +300,8 @@
         .on("mouseout", onMouseOutPath2)
         .text(Country[i]);
         }
+
+        
         });
 
 
@@ -298,15 +358,33 @@
             return item.Year == selectedYear;
         });
 
-        console.log(newArrayYear)
-         var points2 = [];
-        for (var j = 0; j < newArrayYear.length; j++) {
-            console.log(newArrayYear[j].Lifeexpectancy)
-            points2.push([xScale2(newArrayYear[j].Lifeexpectancy), yScale2(newArrayYear[j].HDI)])
-        }
+        
+        //annotations
+        var annotations = [
+            {
+                note: {
+                    label: "Each year shows a positive linear relationship between Life expectancy and HDI",
+                    align: "middle",  // try right or left
+                    wrap: 20,  // try something smaller to see text split in several lines
+                },
+                connector: {
+                end: "arrow",        // Can be none, or arrow or dot
+                type: "curve",      // ?? don't know what it does
+                lineType : "vertical",    // ?? don't know what it does
+                endScale: 10     // dot size
+                },
+                x: 480,
+                y: 350,
+                dy: 50,
+                dx: 50
+            }
+        ]
 
-        console.log(points2)
+        var makeAnnotations = d3.annotation().textWrap(50).annotations(annotations)
+        g2.append("g")
+        .call(makeAnnotations)
 
+        
         for (var j = 0; j < newArrayYear.length; j++) {
         g2.append("rect")
         .attr("x", 940)
@@ -362,7 +440,7 @@
         d3.select(this)
         .attr('stroke', "red");
         d3.selectAll("#" + this.id + "path2")
-        .style("stroke-width", 5)
+          .style("stroke-width", 5)
         }
 
         function onMouseOutPath2(d, i) {
@@ -495,4 +573,6 @@
         }
       </script>
    </body>
+
 </html>
+
