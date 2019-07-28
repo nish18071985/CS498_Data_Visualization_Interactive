@@ -135,3 +135,9 @@ path {
     width: 80px;
     z-index: 10;
 }
+
+.annotation-note-label {
+    font-size: 10px;
+    width: 50px;
+    height: auto;
+}
