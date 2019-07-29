@@ -51,8 +51,8 @@
             The arrows on the sides or the dots at the bottom helps you navigate between different scenes like a slide show.
             Upper right hand corner of the page specifies the page number you are on.]
             </i></p>
-            <h6 style="position:absolute; top:14%; left:30%">Please select year</h6>
-            <select id="yearDrop" style="position:absolute; top:17%; left:40%" onchange="ChangePlot()">
+            <h6 style="position:absolute; top:20%; left:30%">Please select year</h6>
+            <select id="yearDrop" style="position:absolute; top:23%; left:40%" onchange="ChangePlot()">
                 <option value="2000">2000</option>
                 <option value="2001">2001</option>
                 <option value="2002">2002</option>
@@ -189,7 +189,7 @@
         .attr("x", 960)
         .attr("text-anchor", "begin")
         .attr("stroke", "grayscale")
-        .attr("font-size", 10)
+        .attr("font-size", 12)
         .attr("id", Country[i])
         .on("mouseover", onMouseOverPath1)
         .on("mouseout", onMouseOutPath1)
@@ -294,7 +294,7 @@
         .attr("x", 960)
         .attr("text-anchor", "begin")
         .attr("stroke", "grayscale")
-        .attr("font-size", 10)
+        .attr("font-size", 12)
         .attr("id", Country[i])
         .on("mouseover", onMouseOverPath2)
         .on("mouseout", onMouseOutPath2)
@@ -397,7 +397,7 @@
         .attr("x", 960)
         .attr("text-anchor", "begin")
         .attr("stroke", "grayscale")
-        .attr("font-size", 10)
+        .attr("font-size", 12)
         .attr("id", newArrayYear[j].Country)
         .text(newArrayYear[j].Country);    
         }
