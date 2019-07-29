@@ -497,12 +497,7 @@
             g2.append("g")
             .attr("transform", "translate(100," + 500 + ")")
             .call(x_axis2);
-            //x axix label
-            g2.append("text")
-            .attr("y", height - 50)
-            .attr("x", (width - 300) / 2)
-            .attr("font-size", 12)
-            .text("Life Expectancy");
+            
             var yScale2 = d3.scaleLinear()
             .domain([0.1, 1])
             .range([600, 50]);
@@ -511,12 +506,7 @@
             g2.append("g")
             .attr("transform", "translate(100," + -100 + ")")
             .call(y_axis2);
-            // y axis label
-            g2.append("text")
-            .attr("y", height / 2)
-            .attr("x", 30)
-            .attr("font-size", 12)
-            .text("HDI");
+            
             var colorScale2 = d3.scaleOrdinal(d3.schemeCategory10);
             d3.csv("HDI_LifeExpectancy_Data.csv", function(data) {
             
