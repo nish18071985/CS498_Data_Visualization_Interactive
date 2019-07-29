@@ -539,22 +539,7 @@
                 return item.Year == selectedYear;
             });
 
-            for (var j = 0; j < newArrayYear.length; j++) {
-            g2.append("rect")
-            .attr("x", 940)
-            .attr("y", ((17 - j) * 20) - 10)
-            .attr("width", 10)
-            .attr("height", 10)
-            .attr("fill", colorScale2(j));
-            g2.append("text")
-            .attr("y", (17 - j) * 20)
-            .attr("x", 960)
-            .attr("text-anchor", "begin")
-            .attr("stroke", "grayscale")
-            .attr("font-size", 10)
-            .attr("id", newArrayYear[j].Country)
-            .text(newArrayYear[j].Country);    
-            }
+            
             
             svg2.selectAll("circle").remove();
             svg2.selectAll(".dot")
